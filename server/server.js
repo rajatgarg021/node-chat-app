@@ -1,4 +1,3 @@
-
 const express = require("express");
 const app = express();
 
@@ -14,10 +13,19 @@ var io = socketIO(server);
 app.use(express.static(publicPath));
 var port = process.env.PORT || 3000;
 
-io.on("connection",(socket)=>{
+io.on("connection", (socket) => {
     console.log("new user connected");
-    socket.on('disconnect', ()=>{
+
+    socket.on('disconnect', () => {
         console.log("disconnected by the client");
+    })
+    socket.on("createMessage", (newMessage) => {
+        console.log("createMessage", newMessage);
+    })
+    socket.emit("newMessage", {
+        from: "rajatgarg021",
+        text: "Hello motherfucker",
+        createAt: 123
     })
 })
 
@@ -56,4 +64,4 @@ io.on("connection",(socket)=>{
 
 server.listen(port, () => {
     console.log(`Server is up and running on port ${port}`);
-})  
+})
