@@ -6,6 +6,7 @@ socket.on("connect", () => {
 socket.on('disconnect', () => {
     console.log("desconnected from the server");
 })
+
 socket.on("newMessage", function(message){
     console.log("new Message", message);
-})
+});
